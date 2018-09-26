@@ -5,5 +5,5 @@ import datetime as dt
 
 # Create your views here.
 def fashion(request):
-    return HttpResponse('Fashion')
+    return render(request, 'fashion.html')
 
