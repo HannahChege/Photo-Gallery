@@ -3,17 +3,27 @@
 <h1>Fashion</h1>
 {% for photo_item in images %}
 
-<div style="text-align: center" class="row">
+  <div class="row">
     <!-- displaying photo images -->
-</div>
     
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <!-- <h2 class="text-center"> {{ photo_item.Description }} </h2> -->
+      <img src="{{photo_item.image.url}}" class="img-responsive" alt="Image">
+    </div>
 
     <!--Display news photo images  -->
-    <div class="wells">
+    <div class="card ">
+            <div class="row">
+              <div id="image" class="p-1">
+                <div id="front" class="zoom">
+                  <div class="overlay">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <img src="{{photo_item.image.url}}" class="img-responsive" alt="Image">
     </div>
-    
+                  </div>
+                </div>
+              </div>
+            </div>
 </div>
   {% endfor %}
   {% endblock %}
