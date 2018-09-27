@@ -1,3 +1,7 @@
 h1{
     color:purple;
 }
+
+.index {
+    column-count: 2;
+}

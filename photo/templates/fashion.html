@@ -1,17 +1,19 @@
 {% extends 'all-photo/base.html' %}
+{% block content %}
 <h1>Fashion</h1>
-{% for photo_item in image %}
+{% for photo_item in images %}
 
-  <div class="row">
+<div style="text-align: center" class="row">
     <!-- displaying photo images -->
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <h2 class="text-center"> {{ photo_item.title }} </h2>
-    </div>
+</div>
+    
 
     <!--Display news photo images  -->
+    <div class="wells">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <img src="{{photo_item.image.url}}" class="img-responsive" alt="Image">
     </div>
-
-  </div>
+    
+</div>
   {% endfor %}
+  {% endblock %}
