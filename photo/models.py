@@ -18,34 +18,41 @@ class Photographer(models.Model):
         for photographer in photographers:
             return photographer        
     class Meta:
-        ordering = ['first_name'] 
+        ordering = ['first_name']
+
+
+class Location(models.Model):
+    name = models.CharField(max_length =30)
+
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    name = models.CharField(max_length =30)
+
+    def __str__(self):
+        return self.name 
 
 class Image(models.Model):
     title = models.CharField(max_length =30)
-    description = models.TextField(max_length)
-    image_location = models.ForeignKey(Location)
-    image_category = models.ForeignKey( Category)
+    photographer = models.ForeignKey(Photographer)
+    description = models.TextField(max_length =30)
+    image = models.ImageField(upload_to = 'photos/', default='No image')
+    location = models.ManyToManyField(Location)
+    category = models.ManyToManyField(Category)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True) 
     def __str__(self):
         return self.title
     def save_image(self):
         self.save()
     def delete_image(self):
         self.delete()
-   @classmethod
+    @classmethod
     def search_by_title(cls,search_term):
         photo = cls.objects.filter(title__icontains=search_term)
         return photo        
       
-class Location(models.Model):
-    name = models.CharField(max_length =30)
-
-    def __str__(self):
-        return self.name
-class Category(models.Model):
-    name = models.CharField(max_length =30)
-
-    def __str__(self):
-        return self.name        
+       
 
 
 

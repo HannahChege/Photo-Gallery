@@ -6,7 +6,8 @@ from .models import Image,Location,Photographer,Category
 
 # Create your views here.
 def fashion(request):
-    return render(request, 'fashion.html',"photo")
+    images = Image.objects.all()
+    return render(request, 'fashion.html',{'images':images})
 
 def search_results(request):
     
@@ -21,4 +22,9 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
-
+def image(request,image_id):
+    try:
+        image = Image.objects.get(id = image_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"all-photo/image.html", {"image":image})

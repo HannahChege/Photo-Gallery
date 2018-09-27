@@ -1,2 +1,17 @@
 {% extends 'all-photo/base.html' %}
 <h1>Fashion</h1>
+{% for photo_item in image %}
+
+  <div class="row">
+    <!-- displaying photo images -->
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <h2 class="text-center"> {{ photo_item.title }} </h2>
+    </div>
+
+    <!--Display news photo images  -->
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <img src="{{photo_item.image.url}}" class="img-responsive" alt="Image">
+    </div>
+
+  </div>
+  {% endfor %}
