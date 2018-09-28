@@ -11,16 +11,16 @@ def fashion(request):
 
 def search_results(request):
     
-    if 'photo' in request.GET and request.GET["photo"]:
-        search_term = request.GET.get("photo")
-        searched_photos = Photo.search_by_title(search_term)
+    if 'image' in request.GET and request.GET["image"]:
+        search_term = request.GET.get("image")
+        searched_photos = Image.search_by_category(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search.html',{"message":message,"photos": searched_photos})
+        return render(request, 'all-photo/search.html',{"message":message,"photos": searched_photos})
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})
+        return render(request, 'all-photo/search.html',{"message":message})
 
 def image(request,image_id):
     try:
@@ -28,3 +28,9 @@ def image(request,image_id):
     except DoesNotExist:
         raise Http404()
     return render(request,"all-photo/image.html", {"image":image})
+def filter_by_location(request,location_id):
+   """
+   Function that filters images by location
+   """
+   images = Image.filter_by_location(id= location_id)
+   return render (request, 'location.html', {"images":images})    
