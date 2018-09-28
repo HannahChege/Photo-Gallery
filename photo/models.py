@@ -54,7 +54,7 @@ class Image(models.Model):
         return photo        
     @classmethod
     def filter_by_location(cls, id):
-       image = Image.objects.filter(location_id=id).all()
+       image = Image.objects.filter(location_id=id)
        return image  
        
 

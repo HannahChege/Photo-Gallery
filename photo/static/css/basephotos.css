@@ -6,6 +6,17 @@ h1{
 .index {
     column-count: 2;
 }
-img{
-  max-width: 500px;
+
+
+.jumbotron{
+  background-color:purple ;
+}
+.overlay{
+  background-color: blue;
+}
+.well{
+
+}
+#container{
+background-color: silver ;
 }

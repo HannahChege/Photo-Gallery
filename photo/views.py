@@ -28,9 +28,12 @@ def image(request,image_id):
     except DoesNotExist:
         raise Http404()
     return render(request,"all-photo/image.html", {"image":image})
-def filter_by_location(request,location_id):
-   """
-   Function that filters images by location
-   """
-   images = Image.filter_by_location(id= location_id)
-   return render (request, 'location.html', {"images":images})    
+# def filter_by_location(request,location_name):
+#    """
+#    Function that filters images by location
+#    """
+#    images = Image.filter_by_location(location_name = )
+#    return render (request, 'all-photo/location.html', {"images":images})   
+def location(request,location_id):
+    italy = Image.objects.filter(location_id=location_id)
+    return render(request,'all-photo/location.html',{"locations:locations"})

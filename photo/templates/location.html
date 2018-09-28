@@ -1,14 +1,23 @@
-<h1>Fashion</h1>
+{% extends 'all-photo/base.html' %}
+
+
+{% block content %}
+
+<h1> FASHION GALLERY</h1>
+
+
 {% for photo_item in images %}
-    <div class="card ">
-              <div id="image" class="p-1">
-                <div id="front" class="zoom">
-                  <div class="overlay">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <!-- <h1 class="">{{photo_item}}</h1> -->
-      <img src="{{photo_item.image.url}}" data-toggle="modal" data-target="#exampleModal{{photo_item.id}}"class="img-responsive" alt="Image" style="max-width:600px;">
-    </div>
-                  </div>
-                </div>          
-  {% endfor %}
-  {% endblock %}
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+     <p>{{image.name}}</p>
+     <img src="{{photo_item.image.url}}" data-toggle="modal" class="img-responsive" alt="Image" style="max-width:200px;">
+   </div>
+ </div>
+ {% empty %}
+ <div class="row">
+   <h2 class="text-center">There No Images yet</h2>
+ </div>
+ {% endfor %}
+
+
+
+{% endblock%}
