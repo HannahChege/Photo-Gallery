@@ -39,73 +39,37 @@ class CategoryTestClass(TestCase):
     def  setUp(self):
         self.hannah= Tag(name ='Menswear')  
 
-class ImageTestClass(TestCase):
-   """
-   Tests Image class and its functions
-   """
-   #Set up method
-   def setUp(self):
-       #creating a new location and saving it
-       self.local = Location(name='nairobi')
-       self.local.save_location()
+class ImageTestCase(TestCase):
+    # Set Up Method
+    def setUp(self):
+        # self.menswear = Category(category='menswear ')
+        # self.menswear .save_category()
 
-       #creating a new category and saving it
-       self.cat = Category(name='menswear')
-       self.cat.save_cat()
+        # self.nairobi = Location(location='Nairobi')
+        # self.nairobi.save_location()
 
-       #creating an new image
-       self.image = Image(photo='download.jpg', name='name', location=self.local, category = self.cat)
+        self.image = Image(name='fashion', description='mens wear', location=self.nairobi, category=self.menswears)
+        self.image.save_image()
+    
+    def tearDown(self):
+        self.image.delete_image()
+        self.menswears.delete_category()
+        self.nairobi.delete_location()
+    
+    def test_get_all_images(self):
+        images = Image.get_all_images()
+        self.assertTrue(len(images)>0)
+    
+    def test_get_image_by_id(self):
+        images = Image.get_image_by_id(self.image.id)
+        self.assertTrue(images == self.image)
 
-   def test_instance(self):
-       self.assertTrue(isinstance(self.image, Image))
-
-   def test_save_method(self):
-       """
-       Function to test an image and its details is being saved
-       """
-       self.image.save_image()
-       images = Image.objects.all()
-       self.assertTrue(len(images) > 0)
-
-   def test_delete_method(self):
-       """
-       Function to test if an image can be deleted
-       """
-       self.image.save_image()
-       self.image.delete_image()
-
-   def test_update_method(self):
-       """
-       Function to test that an image's details can be updates
-       """
-       self.image.save_image()
-       new_image = Image.objects.filter(photo='download.jpg').update(photo='image1.jpg')
-       images = Image.objects.get(photo='image1.jpg')
-       self.assertTrue(images.photo, 'image1.jpg')
-
-   def test_get_image_by_id(self):
-       """
-       Function to test if you can get an image by its id
-       """
-       self.image.save_image()
-       this_img= self.image.get_image_by_id(self.image.id)
-       image = Image.objects.get(id=self.image.id)
-       self.assertTrue(this_img, image)
-
-   def test_filter_by_location(self):
-       """
-       Function to test if you can get an image by its location
-       """
-       self.image.save_image()
-       this_img = self.image.filter_by_location(self.image.location_id)
-       image = Image.objects.filter(location=self.image.location_id)
-       self.assertTrue(this_img, image)
-
-   def test_filter_by_category_name(self):
-       """
-       Function to test if you can get an image by its category name
-       """
-       self.image.save_image()
-       images = Image.search_image('menswear')
-       self.assertTrue(len(images)>0)              
+    def test_search_image(self):
+        images = Image.search_image('Sports')
+        self.assertTrue(len(images)>0)
+    
+    def test_filter_by_location(self):
+        images = Image.filter_by_location('Nairobi')
+        self.assertTrue(len(images)>0)
+          
                      

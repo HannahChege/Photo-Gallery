@@ -26,6 +26,15 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+    def save_location(self):
+        self.save()
+    
+    def delete_location(self):
+        self.delete()
+    
+    def update_location(self, update):
+        self.photo_location = update
+        self.save()    
 
 class Category(models.Model):
     name = models.CharField(max_length =30)
@@ -41,12 +50,26 @@ class Image(models.Model):
     location = models.ForeignKey(Location)
     category = models.ForeignKey(Category)
     pub_date = models.DateTimeField(auto_now_add=True, null=True) 
+
+    class Meta:
+        ordering = ('-id',)
+
     def __str__(self):
         return self.title
     def save_image(self):
         self.save()
     def delete_image(self):
         self.delete()
+    classmethod
+    def get_all_images(cls):
+        all_images = Image.objects.all()
+        return all_images
+    
+    @classmethod
+    def get_image_by_id(cls, id):
+        an_image = Image.objects.get(id=id)
+        return an_image    
+
 
     @classmethod
     def search_by_category(cls,search_term):
