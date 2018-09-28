@@ -35,5 +35,5 @@ def image(request,image_id):
 #    images = Image.filter_by_location(location_name = )
 #    return render (request, 'all-photo/location.html', {"images":images})   
 def location(request,location_id):
-    italy = Image.objects.filter(location_id=location_id)
-    return render(request,'all-photo/location.html',{"locations:locations"})
+    location = Image.objects.filter(location_id=location_id)
+    return render(request,'location.html',{"location":location})

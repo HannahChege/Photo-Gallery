@@ -38,8 +38,8 @@ class Image(models.Model):
     photographer = models.ForeignKey(Photographer)
     description = models.TextField(max_length =30)
     image = models.ImageField(upload_to = 'photos/', default='No image')
-    location = models.ManyToManyField(Location)
-    category = models.ManyToManyField(Category)
+    location = models.ForeignKey(Location)
+    category = models.ForeignKey(Category)
     pub_date = models.DateTimeField(auto_now_add=True, null=True) 
     def __str__(self):
         return self.title
