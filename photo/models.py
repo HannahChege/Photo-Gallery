@@ -95,9 +95,9 @@ class Image(models.Model):
         photo = cls.objects.filter(category__photo_category__icontains=search_term)
         return photo_category        
     @classmethod
-    def filter_by_location(cls, filter_location):
-       photo_location = Image.objects.filter(location_id=filter_location)
-       return photo_location  
+    def filter_by_location(cls, id):
+       images = Image.objects.filter(location_id=id)
+       return images  
        
 
 
